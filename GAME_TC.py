@@ -12,7 +12,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # why double parentheses
 pygame.display.set_caption("Space Dodge") #name of the game
 
 # BG = pygame.image.load("Utah_map.jpg")
-BG = pygame.transform.scale(pygame.image.load("lastgen.jpeg"),(WIDTH, HEIGHT))
+BG = pygame.transform.scale(pygame.image.load("space.png"),(WIDTH, HEIGHT))
 
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
