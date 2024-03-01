@@ -27,7 +27,8 @@ STAR_IMG = pygame.transform.scale(STAR_IMG, (STAR_WIDTH, STAR_HEIGHT))
 pygame.mixer.init()
 HIT_SOUND = pygame.mixer.Sound("explosion.wav")
 
-FONT = pygame.font.SysFont("Montserrat", 30)
+FONT_SIZE = min(WIDTH, HEIGHT // 10)
+FONT = pygame.font.SysFont("Montserrat", FONT_SIZE)
 
 
 def draw(player, elapsed_time, stars):
@@ -94,13 +95,22 @@ def main():
                 run = False
                 break
 
-        for star in stars:
-            star["angle"] += 1  # Increment rotation angle for animation
+        if run:  # Check if the game is still running before displaying the "YOU SUCK" text
+            for star in stars:
+                star["angle"] += 1  # Increment rotation angle for animation
 
-        draw(player, elapsed_time, stars)
+            draw(player, elapsed_time, stars)
+
+    if not run:  # Display "YOU SUCK" text after the game loop
+        lost_text = FONT.render("YOU SUCK.", 1, "white")
+        WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/2 - lost_text.get_height()/2))
+        pygame.display.update()
+        pygame.time.delay(4000)
 
     pygame.quit()
 
 
 if __name__ == "__main__":
     main()
+
+
