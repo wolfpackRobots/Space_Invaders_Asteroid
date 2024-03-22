@@ -36,7 +36,7 @@ PLAYER_IMG = pygame.image.load("galaga.png").convert_alpha()
 PLAYER_IMG = pygame.transform.scale(PLAYER_IMG, (PLAYER_WIDTH, PLAYER_HEIGHT))
 
 # Load asteroid image
-STAR_IMG = pygame.image.load("Astroid.png").convert_alpha()
+STAR_IMG = pygame.image.load("Asteroid.png").convert_alpha()
 STAR_IMG = pygame.transform.scale(STAR_IMG, (STAR_WIDTH, STAR_HEIGHT))
 
 # Initialize sound effects
