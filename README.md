@@ -1,1 +1,1 @@
-This is a class project for AIM Coding students to simulate working on a software development team to develop a game that is similar to Space Invaders/ Asetroids. This project is a precursor to their next porject for next term.
+This is a class project for AIM Coding students to simulate working on a software development team to develop a game that is similar to Space Invaders/ Asteroids. This project is a precursor to their next project for next term.
