@@ -3,6 +3,7 @@ import time
 import random
 import pygame.sprite
 from pygame.locals import KEYDOWN, KEYUP
+import shelve
 
 # Initialize pygame
 pygame.font.init()
@@ -107,9 +108,13 @@ def draw(player, projectiles, elapsed_time, stars, all_sprites, score):
     pygame.display.update()
 
 # Function to display death message and prompt to play again
-def show_death_message():
+def show_death_message(tscore1):
     message = FONT.render("You died! Would you like to play again? (Y/N)", True, (255, 0, 0))
-    WIN.blit(message, (WIDTH // 2 - message.get_width() // 2, HEIGHT // 2 - message.get_height() // 2))
+    WIN.blit(message, (WIDTH // 2 - message.get_width() // 2, HEIGHT // 2 - message.get_height() // 2 - 50))
+    topscore = FONT.render("Top Score", True, (255, 0, 0))
+    Score1 = FONT.render(f"{tscore1}", True, (255, 0, 0))
+    WIN.blit(topscore, (WIDTH // 2 - topscore.get_width() // 2, HEIGHT // 2 - topscore.get_height() // 2))
+    WIN.blit(Score1, (WIDTH // 2 - Score1.get_width() // 2, HEIGHT // 2 - Score1.get_height() // 2 + 50))
     pygame.display.update()
     while True:
         for event in pygame.event.get():
@@ -118,6 +123,15 @@ def show_death_message():
                     return True  # Player wants to play again
                 elif event.key == pygame.K_n:
                     return False  # Player doesn't want to play again
+
+def Tony_Hawk(huh): #this keeps the high score
+        topscore = FONT.render("Top Score", True, (255, 0, 0))
+        Score1 = FONT.render(f"{huh}", True, (255, 0, 0))
+        WIN.blit(topscore, (WIDTH // 2 - message.get_width() // 2, HEIGHT // 2 - message.get_height() // 2))
+        WIN.blit(Score1, (WIDTH // 2 - message.get_width() // 2, HEIGHT // 2 - message.get_height() // 2 + 50))
+        pygame.display.update()
+        time.sleep(5)
+    #I have no clue why I called this Tony Hawk, but it's kinda funny, so it stays.
 
 # Main game loop
 def main():
@@ -142,6 +156,8 @@ def main():
 
         all_sprites = pygame.sprite.Group()  # Create a sprite group for explosions
 
+        d = shelve.open('scores.txt')
+        
         score = 0  # Initialize score
 
         while run:
@@ -238,7 +254,10 @@ def main():
             all_sprites.update()
 
             if not player_alive:  # If player is dead, show death message and exit after a delay
-                if not show_death_message():  # If player doesn't want to play again
+                if d['scores'] < score:
+                    d['scores'] = score
+                topscore = d['scores']
+                if not show_death_message(topscore):  # If player doesn't want to play again
                     run = False
                     break  # Exit game loop
                 else:  # Player wants to play again
