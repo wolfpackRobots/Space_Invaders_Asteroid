@@ -109,7 +109,6 @@ def draw(player, projectiles, elapsed_time, stars, all_sprites, score):
 
 # Function to display death message and prompt to play again
 def show_death_message(tscore1,tscore2,tscore3):
-    global d
     message = FONT.render("You died! Would you like to play again? (Y/N)", True, (255, 0, 0))
     WIN.blit(message, (WIDTH // 2 - message.get_width() // 2, HEIGHT // 2 - message.get_height() // 2 - 50))
     highscore = FONT.render("Top Scores", True, (255, 0, 0))
@@ -121,7 +120,6 @@ def show_death_message(tscore1,tscore2,tscore3):
     WIN.blit(Score2, (WIDTH // 2 - Score2.get_width() // 2, HEIGHT // 2 - Score2.get_height() // 2 + 100))
     WIN.blit(Score3, (WIDTH // 2 - Score3.get_width() // 2, HEIGHT // 2 - Score3.get_height() // 2 + 150))
     pygame.display.update()
-    d.close()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
